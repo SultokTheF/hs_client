@@ -1,8 +1,10 @@
+// src/pages/ProjectsPage/AssembleModal.tsx
 import React, { useEffect } from "react";
 import { GlassModal } from "@/shared/ui/GlassModal";
 import { GlassButton } from "@/shared/ui/GlassButton";
 import type { Scene } from "@/shared/types/Scene";
 import { VideoPlayer } from "@/components";
+import { Loader } from "@/shared/ui/Loader";
 
 type Props = {
   open: boolean;
@@ -13,6 +15,8 @@ type Props = {
   playIdx: number;
   onPick: (idx: number) => void;
   videoRef: React.RefObject<HTMLVideoElement | null>;
+  assembledUrl?: string | null; // НОВОЕ
+  assembling?: boolean; // НОВОЕ
 };
 
 const AssembleModal: React.FC<Props> = ({
@@ -24,6 +28,8 @@ const AssembleModal: React.FC<Props> = ({
   playIdx,
   onPick,
   videoRef,
+  assembledUrl,
+  assembling = false,
 }) => {
   useEffect(() => {
     const v = videoRef.current;
@@ -39,9 +45,9 @@ const AssembleModal: React.FC<Props> = ({
     <GlassModal
       open={open}
       onClose={onClose}
-      title="Final Film (mock) and Storyboard Export"
+      title="Final Film & Storyboard"
       footer={
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {storyboardUrl && (
             <a
               href={storyboardUrl}
@@ -51,6 +57,23 @@ const AssembleModal: React.FC<Props> = ({
               Download storyboard (.json)
             </a>
           )}
+
+          {/* Кнопка скачивания финального видео */}
+          {assembling ? (
+            <span className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm ring-1 ring-black/10 dark:ring-white/20">
+              <Loader size="sm" />
+              Building final .mp4…
+            </span>
+          ) : assembledUrl ? (
+            <a
+              href={assembledUrl}
+              download
+              className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm ring-1 ring-black/10 transition hover:bg-black/5 dark:ring-white/20 dark:hover:bg-white/10"
+            >
+              Download final .mp4
+            </a>
+          ) : null}
+
           <GlassButton variant="ghost" onClick={onClose}>
             Close
           </GlassButton>

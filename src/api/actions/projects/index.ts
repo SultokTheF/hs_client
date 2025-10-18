@@ -1,5 +1,6 @@
 import { axiosInstance, endpoints } from "@/api";
-import type { Project } from "@/shared/types/Project";
+import type { Project, ProjectDTO } from "@/shared/types/Project";
+import { mapProjectFromDTO } from "@/shared/types/Project";
 
 export const listProjects = async () => {
   const { data } = await axiosInstance.get<Project[]>(endpoints.PROJECTS_LIST);
@@ -11,9 +12,9 @@ export const createProject = async (name: string) => {
   return data;
 };
 
-export const getProject = async (id: string) => {
-  const { data } = await axiosInstance.get<Project>(endpoints.PROJECT_DETAIL(id));
-  return data;
+export const getProject = async (id: string): Promise<Project> => {
+  const { data } = await axiosInstance.get<ProjectDTO>(endpoints.PROJECT_DETAIL(id));
+  return mapProjectFromDTO(data);
 };
 
 export const renameProject = async (id: string, name: string) => {
@@ -24,4 +25,14 @@ export const renameProject = async (id: string, name: string) => {
 export const deleteProject = async (id: string) => {
   const { data } = await axiosInstance.delete<{ detail: string }>(endpoints.PROJECT_DELETE(id));
   return data;
+};
+
+export const getProjectSuggestions = async (
+  projectId: string,
+  prompt?: string,
+): Promise<string[]> => {
+  const url = endpoints.PROJECT_SUGGEST(projectId);
+  const params = prompt ? { prompt } : undefined;
+  const { data } = await axiosInstance.get<{ suggestions: string[] }>(url, { params });
+  return data.suggestions ?? [];
 };

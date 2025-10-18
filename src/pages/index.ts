@@ -1,4 +1,4 @@
 import HomePage from "@/pages/HomePage";
-import ProjectPage from "@/pages/ProjectPage";
+import ProjectsPage from "@/pages/ProjectsPage";
 
-export { HomePage, ProjectPage };
+export { HomePage, ProjectsPage };

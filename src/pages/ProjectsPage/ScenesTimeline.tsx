@@ -4,7 +4,7 @@ import { GlassButton } from "@/shared/ui/GlassButton";
 import { Loader } from "@/shared/ui/Loader";
 import { Download, Scissors } from "lucide-react";
 import type { Scene } from "@/shared/types/Scene";
-import SceneCard from "@/pages/ProjectPage/SceneCard";
+import SceneCard from "@/pages/ProjectsPage/SceneCard";
 
 type Props = {
   scenes: Scene[];
@@ -26,7 +26,7 @@ const ScenesTimeline: React.FC<Props> = ({ scenes, onDelete, onAssemble, isAssem
           disabled={scenes.every((s) => s.status !== "ready") || isAssembling}
         >
           {isAssembling ? <Loader size="sm" /> : <Download className="h-4 w-4" />}
-          <span>{isAssembling ? "Assembling..." : "Assemble film (mock)"}</span>
+          <span>{isAssembling ? "Assembling..." : "Assemble film"}</span>
         </GlassButton>
       </div>
 
