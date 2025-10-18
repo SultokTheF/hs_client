@@ -1,0 +1,27 @@
+{
+  "semi": true,
+  "singleQuote": false,
+  "tabWidth": 2,
+  "useTabs": false,
+  "trailingComma": "all",
+  "printWidth": 100,
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "endOfLine": "auto",
+  "proseWrap": "preserve",
+  "embeddedLanguageFormatting": "auto",
+  "importOrder": [
+    "^react$",
+    "^@/app/(.*)$",
+    "^@/api/(.*)$",
+    "^@/components/(.*)$",
+    "^@/contexts/(.*)$",
+    "^@/hooks/(.*)$",
+    "^@/pages/(.*)$",
+    "^@/shared/(.*)$",
+    "^@/(.*)$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+}

@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===============================
+   CSS Variables / Design Tokens
+   =============================== */
+:root {
+  color-scheme: light;
+
+  /* Фоновые токены для неонового «жидкого» градиента */
+  --bg-a: #f7ffe6;          /* очень светлый лайм */
+  --bg-b: #ffffff;
+  --bg-c: #a9ff00;          /* неоновый акцент */
+  --bg-d: #d2ff8f;          /* мягкий лайм для градиента */
+
+  /* Цвет кольца для стеклянных элементов */
+  --glass-ring: rgba(2, 6, 23, 0.08);
+}
+
+html.dark {
+  color-scheme: dark;
+
+  --bg-a: #0B1020;          /* night.800 */
+  --bg-b: #04060D;          /* night.900 */
+  --bg-c: #a9ff00;          /* тот же неон для подсветки */
+  --bg-d: #233000;          /* приглушённый лайм */
+
+  --glass-ring: rgba(255, 255, 255, 0.08);
+}
+
+/* ===============================
+   App Root Sizing
+   =============================== */
+html, body, #root {
+  height: 100%;
+}
+
+/* ===============================
+   Reduced Motion Respect
+   =============================== */
+/* Любой элемент с классом .motion-ok и его дети отключают анимации и переходы,
+   если пользователь предпочитает меньшую анимацию */
+@media (prefers-reduced-motion: reduce){
+  .motion-ok, .motion-ok * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ===============================
+   Helpers (опционально)
+   =============================== */
+
+/* Тонкий системный скроллбар — неагрессивный (можно убрать, если не нужно) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,.2) transparent;
+}
+html.dark * {
+  scrollbar-color: rgba(255,255,255,.2) transparent;
+}
+
+/* Выделение текста — слегка неоновое */
+::selection {
+  background: rgba(169, 255, 0, 0.35); /* neon-500/35 */
+  color: #0B1020; /* night.800 */
+}
+html.dark ::selection {
+  background: rgba(169, 255, 0, 0.25);
+  color: #ffffff;
+}
+
+/* убираем стеклянный after у конкретных чипов */
+.no-after::after { content: none !important; }
+
+
+/* ===============================
+   Notes for arbitrary opacities
+   =============================== */
+/* Tailwind уже поддерживает запись вида bg-white/[0.075] и bg-white/[0.02].
+   Если где-то в коде ранее было bg-white/7.5 или bg-white/2 — замени на:
+   - bg-white/[0.075]
+   - bg-white/[0.02]
+*/

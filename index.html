@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>HiggsSeries — AI short-film studio</title>
+    <meta name="description" content="HiggsSeries — AI short-film studio" />
+
+    <link rel="icon" type="image/svg+xml" href="/logo-mark.svg" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#A9FF00" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0B1020" />
+
+    <meta property="og:title" content="HiggsSeries — AI short-film studio" />
+    <meta property="og:description" content="Seamless short-film generator." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/logo-mark.svg" />
+    <meta property="og:image:alt" content="HiggsSeries logo" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="module" crossorigin src="/src/app/index.tsx"></script>
+
+    <script>
+      (() => {
+        const theme = localStorage.getItem("higgs:theme");
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+        } else if (theme === "light") {
+          document.documentElement.classList.remove("dark");
+        } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+  </head>
+  <body class="h-full antialiased">
+    <div id="root"></div>
+  </body>
+</html>
